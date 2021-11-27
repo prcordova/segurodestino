@@ -1,14 +1,13 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import { useAuth } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 
 import * as s from './styles';
-import { Header, Sidemenu } from '../components';
+import { Header, SideMenu } from '../components';
 import {
 	Login,
 	Signup,
-
 
 } from '../pages';
 
@@ -16,7 +15,7 @@ const SideBarHeader = ({ children }) => (
 	<Switch>
 		<s.Container>
 			<s.Wrapper>
-				<Sidemenu />
+				<SideMenu />
 				<main>
 					<Header />
 					{children}

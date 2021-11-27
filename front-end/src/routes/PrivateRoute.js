@@ -8,7 +8,7 @@ import {
 	Route as ReactDOMRoute,
 	Redirect,
 } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import useAuth from '../hooks/useAuth';
 
 const PrivateRoute = ({ isPrivate = false, component: Component, ...rest }) => {
 	const { currentUser } = useAuth();

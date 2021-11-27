@@ -2,6 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import { firebase, auth } from '../../service/firebase'
 
+
+import ButtonCustom from '../../components/index'
+import { colors } from '../../assets/colors'
+
+import * as S from './styles'
+
+
 const Login = () => {
   const { user, setUser } = useAuth();
 
@@ -42,14 +49,57 @@ const Login = () => {
 
   }
   return (
-    <div>
-      <div>
-        <h1>teste</h1>
-      </div>
-      <div>
-        <button onClick={handleClickButtonLogin}>Login</button>
-      </div>
-    </div>
+    <>
+      <S.MainLoginContainer>
+        <S.LoginContainer>
+          < S.HeaderLoginForm>
+            <h1>
+              Seja bem vindo!
+            </h1>
+            <small> Faça login com uma das opções abaixo</small>
+          </S.HeaderLoginForm>
+          <S.FormContainer>
+            <form action="logar">
+              <S.InputFormLogin>
+                <label htmlFor="email">E-mail  </label>
+                <input type="text" />
+              </S.InputFormLogin>
+              <S.InputFormLogin>
+                <label htmlFor="Senha">Senha  </label>
+                <input type="password" />
+
+                <ButtonCustom
+                  width='100%'
+                  height='25px'
+                  type={'submit'}
+                  color={colors.purple}
+                >
+                  Entrar
+                </ButtonCustom>
+
+              </S.InputFormLogin>
+            </form>
+          </S.FormContainer>
+
+          <S.FooterLoginForm>
+            <ButtonCustom
+              onClick={handleClickButtonLogin}
+              color={colors.purple}
+            >
+              Logar com Google
+            </ButtonCustom>
+            <ButtonCustom
+              onClick={handleClickButtonLogin}
+              color={colors.purple}
+
+            >
+              Criar conta
+            </ButtonCustom>
+          </S.FooterLoginForm>
+        </S.LoginContainer>
+
+      </S.MainLoginContainer >
+    </>
   );
 };
 export default Login;
