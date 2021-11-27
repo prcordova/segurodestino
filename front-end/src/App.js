@@ -1,56 +1,17 @@
-import { useContext, useEffect, useState } from 'react';
-import useAuth from './hooks.js/useAuth';
-import { firebase, auth } from './services/firebase'
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import GlobalStyle from './styles/global';
 
-export default function App() {
-  const { user, setUser } = useAuth();
+import Routes from './routes';
 
+const App = () => (
+  <Router>
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        const { uid, displayName, photoURL } = user;
-        if (!displayName || !photoURL) throw new Error("Usuário sem nome de identificação ou foto");
-
-        setUser({
-          id: uid,
-          avatar: photoURL,
-          name: displayName,
-        })
-
-      }
-    })
-  }, []);
-
-
-  const handleClickButtonLogin = async () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-
-    const result = await auth.signInWithPopup(provider);
-
-    if (result.user) {
-      const { uid, displayName, photoURL } = result.user;
-      if (!displayName || !photoURL) throw new Error("Usuário sem nome de identificação ou foto");
-
-      setUser({
-        id: uid,
-        avatar: photoURL,
-        name: displayName,
-
-      })
-    }
-
-  }
-  return (
-    <div>
-      <div>
-        <h1>teste</h1>
-      </div>
-      <div>
-        <button onClick={handleClickButtonLogin}>Login</button>
-      </div>
-    </div>
-  );
-};
-
-
+    <Routes />
+    <GlobalStyle />
+  </Router>
+);
+export default App;
