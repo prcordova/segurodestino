@@ -71,7 +71,8 @@ const Login = () => {
                 <ButtonCustom
                   width='100%'
                   height='25px'
-                  type={'submit'}
+
+                  onClick={handleClickButtonLogin}
                   color={colors.purple}
                 >
                   Entrar

@@ -91,3 +91,30 @@ export const InputFormLogin = styled.div`
 
   }
 `;
+export const Label = styled.label`
+	color: #fff;
+	font-size: 20px;
+	font-family: IBM Plex Sans;
+`;
+
+export const Input = styled.input`
+	width: 450px;
+	height: 50px;
+	border: 1px solid #585d5d;
+	background: radial-gradient(
+		90.95% 100% at 66.86% 0%,
+		rgba(46, 50, 51, 0.4) 0%,
+		rgba(25, 25, 25, 0.4) 100%
+	);
+	color: #585d5d;
+	border-radius: 15px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding-left: 20px;
+
+	-webkit-autofill:hover,
+	-webkit-autofill:focus,
+	-webkit-autofill:active {
+		-webkit-box-shadow: 0 0 0 30px #000;
+	}
+`;
