@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext, useEffect, useState } from 'react';
+import useAuth from './hooks.js/useAuth';
+import { firebase, auth } from './services/firebase'
 
-function App() {
+export default function App() {
+  const { user, setUser } = useAuth();
+
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        const { uid, displayName, photoURL } = user;
+        if (!displayName || !photoURL) throw new Error("Usuário sem nome de identificação ou foto");
+
+        setUser({
+          id: uid,
+          avatar: photoURL,
+          name: displayName,
+        })
+
+      }
+    })
+  }, []);
+
+
+  const handleClickButtonLogin = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    const result = await auth.signInWithPopup(provider);
+
+    if (result.user) {
+      const { uid, displayName, photoURL } = result.user;
+      if (!displayName || !photoURL) throw new Error("Usuário sem nome de identificação ou foto");
+
+      setUser({
+        id: uid,
+        avatar: photoURL,
+        name: displayName,
+
+      })
+    }
+
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+        <h1>teste</h1>
+      </div>
+      <div>
+        <button onClick={handleClickButtonLogin}>Login</button>
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+
